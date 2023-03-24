@@ -4,9 +4,9 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=GreenLight Kernel
-maintainer.string1=AssunZain
-maintainer.string2=Nothing
+kernel.string=XNova-V1.2
+maintainer.string1=Hirokixd
+maintainer.string2=Nobody
 do.devicecheck=1
 do.modules=0
 do.systemless=1

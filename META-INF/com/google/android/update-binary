@@ -474,7 +474,7 @@ fi;
 ui_print "================================================";
 ui_print " GreenLight Kernel For X01AD";
 ui_print "================================================";
-ui_print " BY : MR.A (@Assunzain)";
+ui_print " BY : Hirokixd (@Hirokixd28)";
 ui_print "================================================";
 ui_print " ";
 ui_print "- Introducing $(file_getprop anykernel.sh kernel.string)";
@@ -509,4 +509,4 @@ if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
 fi;
 
 ui_print " " " " "Completed!";
-ui_print " " " " " The GreenLight Kernel installation was successful!!!";
+ui_print " " " " " The XNova Kernel installation was successful!!!";
