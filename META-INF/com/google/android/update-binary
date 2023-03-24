@@ -24,10 +24,8 @@ ui_print() {
   done;
 }
 ui_printfile() {
-  local line losrpad;
-  $BOOTMODE || [ -e /twres ] || losrpad='| '; # work around LOS Recovery eating leading whitespace
   while IFS='' read -r line || $BB [[ -n "$line" ]]; do
-    ui_print "$losrpad$line";
+    ui_print "$line";
   done < $1;
 }
 show_progress() { echo "progress $1 $2" >> $OUTFD; }
@@ -40,7 +38,6 @@ find_slot() {
     [ "$slot" ] || slot=$($BB grep -o 'androidboot.slot=.*$' /proc/cmdline | $BB cut -d\  -f1 | $BB cut -d= -f2);
     [ "$slot" ] && slot=_$slot;
   fi;
-  [ "$slot" == "normal" ] && unset slot;
   [ "$slot" ] && echo "$slot";
 }
 setup_mountpoint() {
@@ -211,7 +208,7 @@ setup_env() {
   if [ ! "$(getprop 2>/dev/null)" ]; then
     getprop() {
       local propdir propfile propval;
-      for propdir in / /system_root /system /vendor /product /product/etc /system_ext/etc /odm/etc; do
+      for propdir in / /system_root /system /vendor /product /system_ext /odm; do
         for propfile in default.prop build.prop; do
           if [ "$propval" ]; then
             break 2;
@@ -474,16 +471,19 @@ if [ -f banner ]; then
   ui_print " " " ";
 fi;
 
-KERNEL_STRING="$(file_getprop anykernel.sh kernel.string)";
-ui_print "$KERNEL_STRING";
-if [ -f version ]; then
-  ui_print " ";
-  ui_printfile version;
-  ui_print " ";
-fi;
-ui_print " " "AnyKernel3 by osm0sis @ xda-developers" " ";
-$BB grep -oE 'AK_BASE.*' META-INF/com/google/android/updater-script >&2;
+ui_print "================================================";
+ui_print " GreenLight Kernel For X01AD";
+ui_print "================================================";
+ui_print " BY : MR.A (@Assunzain)";
+ui_print "================================================";
 ui_print " ";
+ui_print "- Introducing $(file_getprop anykernel.sh kernel.string)";
+ui_print " ";
+ui_print "- Maintainer: $(file_getprop anykernel.sh maintainer.string1 )";
+ui_print "- Co-Maintainer: $(file_getprop anykernel.sh maintainer.string2)";
+ui_print "=======================================";
+ui_print "AnyKernel3 by osm0sis @ xda-developers";
+ui_print "=======================================";
 
 setup_env;
 
@@ -491,10 +491,10 @@ do_devicecheck;
 do_versioncheck;
 do_levelcheck;
 
-ui_print "Installing...";
+ui_print " - Installing...";
 CORE=$($BB grep -oE 'ak.*core.sh' anykernel.sh);
 [ -f tools/$CORE ] || $BB ln -s $AKHOME/tools/ak*-core.sh $AKHOME/tools/$CORE;
-PATH="$AKHOME/bin:$PATH" ZIPFILE="$3" home=$AKHOME $BB ash anykernel.sh $2;
+PATH="$AKHOME/bin:$PATH" home=$AKHOME $BB ash anykernel.sh $2;
 if [ $? != 0 ]; then
   abort;
 fi;
@@ -502,11 +502,11 @@ fi;
 do_modules;
 
 debugging;
-ui_print " ";
 restore_env;
 
 if [ "$(file_getprop anykernel.sh do.cleanup)" == 1 ]; then
   cleanup;
 fi;
 
-ui_print " " "Done!";
+ui_print " " " " "Completed!";
+ui_print " " " " " The GreenLight Kernel installation was successful!!!";
