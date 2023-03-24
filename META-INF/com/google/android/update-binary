@@ -472,7 +472,7 @@ if [ -f banner ]; then
 fi;
 
 ui_print "================================================";
-ui_print " GreenLight Kernel For X01AD";
+ui_print " XNova Kernel For X01AD";
 ui_print "================================================";
 ui_print " BY : Hirokixd (@Hirokixd28)";
 ui_print "================================================";
