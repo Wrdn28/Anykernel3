@@ -4,7 +4,7 @@
 ## AnyKernel setup
 # begin properties
 properties() { '
-kernel.string=XNova-V1.2
+kernel.string=XNova-V1.4-KernelSU
 maintainer.string1=Hirokixd
 maintainer.string2=Nobody
 do.devicecheck=1
